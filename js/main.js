@@ -22,21 +22,21 @@ var terreno = L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', 
     attribution: '&copy; <a href="https://www.google.com/earth/">Google Terrain</a>'
 });
 
-// Agregar una capa base inicial (por ejemplo, híbrido)
+// Agregar una capa base inicial (por ejemplo, hÃ­brido)
 hibrido.addTo(map);
 
 // Crear un objeto para el control de capas base
 var baseMaps = {
     "Calles": calles,
-    "Satélite": satelite,
-    "Híbrido": hibrido,
+    "SatÃ©lite": satelite,
+    "HÃ­brido": hibrido,
     "Terreno": terreno
 };
 
 // Agregar control para cambiar entre mapas
 L.control.layers(baseMaps).addTo(map);
-// Cargar tus polígonos desde GeoJSON
-fetch('data/GeoJSON_poligono_partida.geojson')
+// Cargar tus polÃ­gonos desde GeoJSON
+fetch('data/GeoJSON_poligono_partida_rev.geojson')
     .then(res => res.json())
     .then(data => {
         L.geoJSON(data, {
@@ -46,11 +46,12 @@ fetch('data/GeoJSON_poligono_partida.geojson')
                 fillOpacity: 0.3
             },
             onEachFeature: function (feature, layer) {
-                // Muestra información de atributos al hacer clic
+                // Muestra informaciÃ³n de atributos al hacer clic
                 let props = feature.properties;
                 let info = `<b>Partida:</b> ${props.Partida || 'N/A'}<br>
-                    <b>Área:</b> ${props.area_m2?.toFixed(2) || '---'} m²`;
+                    <b>area:</b> ${props.area_m2?.toFixed(2) || '---'} m2`;
                 layer.bindPopup(info);
             }
         }).addTo(map);
     });
+
